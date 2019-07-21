@@ -8,12 +8,12 @@ const App: React.FC = () => {
 
   React.useEffect(() => {
     const id = setInterval(() => {
-      store.addTodo()
+      store.test()
     }, 1000)
     return () => {
       clearInterval(id)
     }
-  }, [])
+  }, [store])
 
   return (
     <div className="App">

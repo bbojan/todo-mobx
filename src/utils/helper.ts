@@ -3,7 +3,8 @@ export function newUID() {
   _uid++
   return _uid
 }
-export function addInArrayFast<T>(thisArray: T[], toAdd: T[]): T[] {
-  Array.prototype.push.apply(thisArray, toAdd)
-  return thisArray
+
+export function addInArrayFast<T>(array: T[], valuesToAdd: T[]): T[] {
+  Array.prototype.push.apply(array, valuesToAdd)
+  return array
 }
