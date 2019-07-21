@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { observer } from 'mobx-react-lite'
+import React from 'react'
+import './App.css'
+import { useGlobals } from './store/GlobalContext'
 
 const App: React.FC = () => {
+  const { store } = useGlobals()
+
+  React.useEffect(() => {
+    const id = setInterval(() => {
+      store.addTodo()
+    }, 1000)
+    return () => {
+      clearInterval(id)
+    }
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {store.todos.map((todo, index) => {
+        return (
+          <div key={index}>
+            <h2>{todo}</h2>
+          </div>
+        )
+      })}
     </div>
-  );
+  )
 }
 
-export default App;
+export default observer(App)
