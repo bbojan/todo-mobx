@@ -4,6 +4,7 @@ import { GlobalStore } from './GlobalStore'
 
 export interface IGlobals {
   store: GlobalStore
+  //
   routing: RouterStore
   synchronizedHistory?: SynchronizedHistory
 }
@@ -15,6 +16,6 @@ export const InitialGlobals: IGlobals = {
 
 export const GlobalContext = React.createContext<IGlobals>(InitialGlobals)
 
-export function useGlobals(): IGlobals {
+export function useStore(): IGlobals {
   return React.useContext(GlobalContext)
 }

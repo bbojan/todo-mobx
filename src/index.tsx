@@ -8,6 +8,7 @@ import App from './App'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
 import { GlobalContext, InitialGlobals } from './store/GlobalContext'
+import { configure } from 'mobx';
 
 export const theme = createMuiTheme()
 
@@ -16,11 +17,13 @@ const history = syncHistoryWithStore(browserHistory, InitialGlobals.routing)
 
 InitialGlobals.synchronizedHistory = history
 
+configure({enforceActions: 'observed'}) // strict mode
+
 const TheApp = (
   <GlobalContext.Provider value={InitialGlobals}>
     <MuiThemeProvider theme={theme}>
       <Router history={history}>
-        <App />
+          <App />
       </Router>
     </MuiThemeProvider>
   </GlobalContext.Provider>
